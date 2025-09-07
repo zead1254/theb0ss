@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صانع السيرة الذاتية الاحترافية - The Boss</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --success-color: #2ecc71;
+            --dark-color: #1a252f;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 30px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .logo {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            font-weight: bold;
+            color: var(--light-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .form-section {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .preview-section {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 16px;
+        }
+        
+        button {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        button i {
+            margin-left: 8px;
+        }
+        
+        .add-btn {
+            background: var(--success-color);
+            margin-top: 10px;
+        }
+        
+        .add-btn:hover {
+            background: #27ae60;
+        }
+        
+        .remove-btn {
+            background: var(--accent-color);
+            margin-right: 10px;
+            padding: 8px 12px;
+        }
+        
+        .send-btn {
+            background: var(--primary-color);
+            margin-top: 20px;
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+        }
+        
+        .export-btn {
+            background: #9b59b6;
+            margin-top: 15px;
+        }
+        
+        .export-btn:hover {
+            background: #8e44ad;
+        }
+        
+        .experience-item, .education-item, .course-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .cv-preview {
+            border: 1px solid #ddd;
+            padding: 20px;
+            min-height: 500px;
+            border-radius: 5px;
+            background: #fff;
+        }
+        
+        .cv-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        .cv-header-info {
+            flex: 2;
+        }
+        
+        .cv-photo-container {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+        }
+        
+        .cv-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 5px;
+            object-fit: cover;
+            border: 2px solid var(--secondary-color);
+        }
+        
+        .cv-name {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .cv-title {
+            font-size: 18px;
+            color: #7f8c8d;
+        }
+        
+        .cv-section {
+            margin-bottom: 20px;
+        }
+        
+        .cv-section-title {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .cv-experience-item, .cv-education-item, .cv-course-item {
+            margin-bottom: 15px;
+        }
+        
+        .cv-item-title {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .cv-item-date {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .cv-item-desc {
+            margin-top: 5px;
+        }
+        
+        .alert {
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .photo-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .photo-preview {
+            width: 150px;
+            height: 150px;
+            border: 2px dashed var(--secondary-color);
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #f9f9f9;
+        }
+        
+        .photo-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            display: none;
+        }
+        
+        .upload-btn {
+            background: #9b59b6;
+        }
+        
+        .export-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            font-size: 20px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chat-container {
+            margin-top: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chat-messages {
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 15px;
+            background: #f9f9f9;
+        }
+        
+        .message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+        
+        .message.user {
+            background: var(--secondary-color);
+            color: white;
+            margin-left: auto;
+        }
+        
+        .message.admin {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+        }
+        
+        .chat-input button {
+            white-space: nowrap;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .cv-header {
+                flex-direction: column-reverse;
+            }
+            
+            .cv-photo-container {
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+            
+            .export-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-crown"></i>
+                <span>The Boss</span>
+            </div>
+            <h1>صانع السيرة الذاتية الاحترافية</h1>
+            <p>أنشئ سيرتك الذاتية بسهولة مع إضافة صورة شخصية وأرسلها عبر الواتساب</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="form-section">
+                <h2>المعلومات الشخصية</h2>
+                
+                <div class="photo-upload">
+                    <div class="photo-preview" id="photoPreview">
+                        <i class="fas fa-user fa-3x" style="color: #ccc;"></i>
+                        <img id="previewImg" src="" alt="الصورة الشخصية">
+                    </div>
+                    <input type="file" id="photoUpload" accept="image/*" style="display: none;">
+                    <button class="upload-btn" onclick="document.getElementById('photoUpload').click()">
+                        <i class="fas fa-upload"></i> رفع صورة شخصية
+                    </button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fullName">الاسم بالكامل</label>
+                    <input type="text" id="fullName" placeholder="أدخل اسمك بالكامل">
+                </div>
+                
+                <div class="form-group">
+                    <label for="jobTitle">المسمى الوظيفي</label>
+                    <input type="text" id="jobTitle" placeholder="مثال: دكتور - مهندس - مطور ويب - مصمم جرافيك">
+                </div>
+                
+                <div class="form-group">
+                    <label for="nationalId">الرقم القومي</label>
+                    <input type="text" id="nationalId" placeholder="أدخل الرقم القومي">
+                </div>
+                
+                <div class="form-group">
+                    <label for="governorate">المحافظة</label>
+                    <select id="governorate">
+                        <option value="">اختر المحافظة</option>
+                        <option value="القاهرة">القاهرة</option>
+                        <option value="الجيزة">الجيزة</option>
+                        <option value="الأسكندرية">الأسكندرية</option>
+                        <option value="الدقهلية">الدقهلية</option>
+                        <option value="البحر الأحمر">البحر الأحمر</option>
+                        <option value="البحيرة">البحيرة</option>
+                        <option value="الفيوم">الفيوم</option>
+                        <option value="الغربية">الغربية</option>
+                        <option value="الإسماعيلية">الإسماعيلية</option>
+                        <option value="المنوفية">المنوفية</option>
+                        <option value="المنيا">المنيا</option>
+                        <option value="القليوبية">القليوبية</option>
+                        <option value="الوادي الجديد">الوادي الجديد</option>
+                        <option value="السويس">السويس</option>
+                        <option value="اسوان">اسوان</option>
+                        <option value="اسيوط">اسيوط</option>
+                        <option value="بني سويف">بني سويف</option>
+                        <option value="بورسعيد">بورسعيد</option>
+                        <option value="دمياط">دمياط</option>
+                        <option value="الشرقية">الشرقية</option>
+                        <option value="جنوب سيناء">جنوب سيناء</option>
+                        <option value="كفر الشيخ">كفر الشيخ</option>
+                        <option value="مطروح">مطروح</option>
+                        <option value="الأقصر">الأقصر</option>
+                        <option value="قنا">قنا</option>
+                        <option value="شمال سيناء">شمال سيناء</option>
+                        <option value="سوهاج">سوهاج</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="city">المدينة</label>
+                    <select id="city">
+                        <option value="">اختر المدينة</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">العنوان بالتفصيل</label>
+                    <textarea id="address" rows="2" placeholder="الحي/القرية - الشارع - رقم المنزل"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="birthDate">تاريخ الميلاد</label>
+                    <input type="date" id="birthDate">
+                </div>
+                
+                <div class="form-group">
+                    <label for="religion">الدين</label>
+                    <select id="religion">
+                        <option value="">اختر دينك</option>
+                        <option value="مسلم">مسلم</option>
+                        <option value="مسيحي">مسيحي</option>
+                        <option value="أخرى">أخرى</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="maritalStatus">الحالة الاجتماعية</label>
+                    <select id="maritalStatus">
+                        <option value="">اختر حالتك الاجتماعية</option>
+                        <option value="أعزب">أعزب</option>
+                        <option value="متزوج">متزوج</option>
+                        <option value="منفصل">منفصل</option>
+                        <option value="أرمل">أرمل</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="childrenNumberGroup" style="display: none;">
+                    <label for="childrenNumber">عدد الأطفال</label>
+                    <select id="childrenNumber">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6 أو أكثر</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" placeholder="example@domain.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف</label>
+                    <input type="tel" id="phone" placeholder="مثال: +201012345678">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone2">رقم هاتف إضافي (اختياري)</label>
+                    <input type="tel" id="phone2" placeholder="مثال: +201012345678">
+                </div>
+                
+                <div class="form-group">
+                    <label for="summary">نبذة عنك</label>
+                    <textarea id="summary" rows="4" placeholder="اكتب نبذة مختصرة عنك"></textarea>
+                </div>
+                
+                <h2>الخبرات العملية</h2>
+                <div id="experiences">
+                    <div class="experience-item">
+                        <button class="remove-btn" onclick="removeItem(this)"><i class="fas fa-trash"></i></button>
+                        <div class="form-group">
+                            <label>المسمى الوظيفي</label>
+                            <input type="text" class="exp-title" placeholder="مثال: مطور ويب">
+                        </div>
+                        <div class="form-group">
+                            <label>اسم الشركة</label>
+                            <input type="text" class="exp-company" placeholder="اسم الشركة">
+                        </div>
+                        <div class="form-group">
+                            <label>الفترة</label>
+                            <input type="text" class="exp-period" placeholder="مثال: 2020 - 2022">
+                        </div>
+                        <div class="form-group">
+                            <label>الوصف</label>
+                            <textarea class="exp-description" rows="3" placeholder="وصف المسؤوليات والإنجازات"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-btn" id="addExperience"><i class="fas fa-plus"></i> إضافة خبرة أخرى</button>
+                
+                <h2>التعليم</h2>
+                <div id="educations">
+                    <div class="education-item">
+                        <button class="remove-btn" onclick="removeItem(this)"><i class="fas fa-trash"></i></button>
+                        <div class="form-group">
+                            <label>المؤهل</label>
+                            <input type="text" class="edu-degree" placeholder="مثال: بكالوريوس هندسة">
+                        </div>
+                        <div class="form-group">
+                            <label>المؤسسة التعليمية</label>
+                            <input type="text" class="edu-institution" placeholder="اسم الجامعة أو المعهد">
+                        </div>
+                        <div class="form-group">
+                            <label>الفترة</label>
+                            <input type="text" class="edu-period" placeholder="مثال: 2015 - 2019">
+                        </div>
+                    </div>
+                </div>
+                <button class="add-btn" id="addEducation"><i class="fas fa-plus"></i> إضافة مؤهل آخر</button>
+                
+                <h2>الكورسات</h2>
+                <div id="courses">
+                    <div class="course-item">
+                        <button class="remove-btn" onclick="removeItem(this)"><i class="fas fa-trash"></i></button>
+                        <div class="form-group">
+                            <label>اسم الكورس</label>
+                            <input type="text" class="course-name" placeholder="مثال: تطوير الويب">
+                        </div>
+                        <div class="form-group">
+                            <label>المؤسسة</label>
+                            <input type="text" class="course-institution" placeholder="اسم المؤسسة">
+                        </div>
+                        <div class="form-group">
+                            <label>المدة</label>
+                            <input type="text" class="course-duration" placeholder="مثال: 3 أشهر">
+                        </div>
+                    </div>
+                </div>
+                <button class="add-btn" id="addCourse"><i class="fas fa-plus"></i> إضافة كورس آخر</button>
+                
+                <h2>المهارات</h2>
+                <div class="form-group">
+                    <label for="skills">المهارات (افصل بينها بفواصل)</label>
+                    <textarea id="skills" rows="3" placeholder="مثال: HTML, CSS, JavaScript, التصميم الجرافيكي"></textarea>
+                </div>
+            </div>
+            
+            <div class="preview-section">
+                <h2>معاينة السيرة الذاتية</h2>
+                <div class="cv-preview" id="cvPreview">
+                    <div class="cv-header">
+                        <div class="cv-header-info">
+                            <div class="cv-name">الاسم بالكامل</div>
+                            <div class="cv-title">المسمى الوظيفي</div>
+                        </div>
+                        <div class="cv-photo-container">
+                            <img src="" class="cv-photo" id="cvPhoto" style="display: none;">
+                        </div>
+                    </div>
+                    
+                    <div class="cv-section">
+                        <div class="cv-section-title">المعلومات الشخصية</div>
+                        <div id="cvPersonalInfo"></div>
+                    </div>
+                    
+                    <div class="cv-section">
+                        <div class="cv-section-title">نبذة عني</div>
+                        <div id="cvSummary"></div>
+                    </div>
+                    
+                    <div class="cv-section">
+                        <div class="cv-section-title">الخبرات العملية</div>
+                        <div id="cvExperiences"></div>
+                    </div>
+                    
+                    <div class="cv-section">
+                        <div class="cv-section-title">التعليم</div>
+                        <div id="cvEducations"></div>
+                    </div>
+                    
+                    <div class="cv-section">
+                        <div class="cv-section-title">الكورسات</div>
+                        <div id="cvCourses"></div>
+                    </div>
+                    
+                    <div class="cv-section">
+                        <div class="cv-section-title">المهارات</div>
+                        <div id="cvSkills"></div>
+                    </div>
+                </div>
+                
+                <div class="export-buttons">
+                    <button class="send-btn" id="sendWhatsApp"><i class="fab fa-whatsapp"></i> إرسال via WhatsApp</button>
+                    <button class="export-btn" id="exportPDF"><i class="fas fa-file-pdf"></i> حفظ كPDF</button>
+                    <button class="export-btn" id="printCV"><i class="fas fa-print"></i> طباعة</button>
+                    <button class="export-btn" id="exportATS"><i class="fas fa-file-alt"></i> نسخة ATS</button>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://wa.me/message/TQP2VP6NCWNIJ1?src=qr" class="social-link" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="https://www.facebook.com/zeadelsayed9?mibextid=ZbWKwL" class="social-link" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/dr_zead_elsayed?igsh=MXJuMjh6dnU0Y29jYw==" class="social-link" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.snapchat.com/add/drzeadelsayed?share_id=F1-6gJ4uTVM&locale=ar-EG" class="social-link" target="_blank">
+                        <i class="fab fa-snapchat-ghost"></i>
+                    </a>
+                    <a href="https://t.me/dr_zead" class="social-link" target="_blank">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://youtube.com/@1The_Boss?si=YdEhYwi7pzYXsH8p" class="social-link" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+                
+                <div class="chat-container">
+                    <h3>💬 دردشة المساعد</h3>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message admin">
+                            مرحبًا! أنا المساعد الذكي، كيف يمكنني مساعدتك؟
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="اكتب سؤالك هنا...">
+                        <button id="sendChat"><i class="fas fa-paper-plane"></i> إرسال</button>
+                    </div>
+                </div>
+                
+                <div class="alert alert-success" id="successAlert">
+                    تم إعداد السيرة الذاتية بنجاح! جاري التوجيه إلى الواتساب...
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            تم إنشاء هذا التطبيق بواسطة <span style="color: var(--accent-color);">Dr. Zead Elsayed (The Boss)</span>
+        </div>
+    </div>
+
+    <script>
+        // بيانات المدن لكل محافظة
+        const citiesByGovernorate = {
+            "القاهرة": ["وسط القاهرة", "المعادي", "المقطم", "مدينة نصر", "الزمالك", "مصر الجديدة", "حلوان", "شبرا"],
+            "الجيزة": ["الدقي", "المهندسين", "العجوزة", "الهرم", "أوسيم", "6 أكتوبر", "البدرشين", "الصف"],
+            "الأسكندرية": ["المنتزه", "سموحة", "سيدي جابر", "العصافرة", "المنشية", "الرمل", "برج العرب", "العجمي"],
+            "الدقهلية": ["المنصورة", "طلخا", "ميت غمر", "بلقاس", "أجا", "المنزلة", "شربين", "السنبلاوين"],
+            "البحر الأحمر": ["الغردقة", "رأس غارب", "مرسى علم", "شلاتين", "حلايب"],
+            "البحيرة": ["دمنهور", "كفر الدوار", "رشيد", "إدكو", "أبو المطامير", "أبو حمص", "الدلنجات"],
+            "الفيوم": ["الفيوم", "إطسا", "سنورس", "طامية"],
+            "الغربية": ["طنطا", "المحلة الكبرى", "زفتى", "كفر الزيات", "بسيون"],
+            "الإسماعيلية": ["الإسماعيلية", "فايد", "القنطرة", "التل الكبير", "أبو صوير"],
+            "المنوفية": ["شبين الكوم", "منوف", "أشمون", "الباجور", "قويسنا"],
+            "المنيا": ["المنيا", "ملوي", "دير مواس", "مغاغة", "بني مزار"],
+            "القليوبية": ["بنها", "قليوب", "شبرا الخيمة", "القناطر الخيرية", "الخانكة"],
+            "الوادي الجديد": ["الخارجة", "الداخلة", "الفرافرة", "باريس", "بلاط"],
+            "السويس": ["السويس", "الأربعين", "عتاقة", "فيصل", "الجناين"],
+            "اسوان": ["أسوان", "كوم أمبو", "دراو", "نصر النوبة", "إدفو"],
+            "اسيوط": ["أسيوط", "ديروط", "منفلوط", "القوصية", "أبو تيج"],
+            "بني سويف": ["بني سويف", "ناصر", "إهناسيا", "ببا", "الفشن"],
+            "بورسعيد": ["بورسعيد", "بورفؤاد", "المناخ", "الضواحي", "العرب"],
+            "دمياط": ["دمياط", "فارسكور", "الزرقا", "كفر سعد", "رأس البر"],
+            "الشرقية": ["الزقازيق", "بلبيس", "أبو حماد", "ههيا", "فاقوس"],
+            "جنوب سيناء": ["الطور", "شرم الشيخ", "دهب", "نويبع", "طابا"],
+            "كفر الشيخ": ["كفر الشيخ", "دسوق", "فوه", "بلطيم", "الحامول"],
+            "مطروح": ["مرسى مطروح", "الحمام", "العلمين", "الضبعة", "سيوة"],
+            "الأقصر": ["الأقصر", "إسنا", "الزينية", "البياضية", "القرنة"],
+            "قنا": ["قنا", "قفط", "دشنا", "نجع حمادي", "أبو تشت"],
+            "شمال سيناء": ["العريش", "الشيخ زويد", "رفح", "بئر العبد", "الحسنة"],
+            "سوهاج": ["سوهاج", "جرجا", "أخميم", "البلينا", "دار السلام"]
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // تحديث المعاينة عند تغيير المدخلات
+            const inputs = document.querySelectorAll('input, textarea, select');
+            inputs.forEach(input => {
+                input.addEventListener('input', updatePreview);
+            });
+            
+            // إعداد قائمة المدن بناءً على المحافظة المختارة
+            const governorateSelect = document.getElementById('governorate');
+            const citySelect = document.getElementById('city');
+            
+            governorateSelect.addEventListener('change', function() {
+                const selectedGovernorate = this.value;
+                citySelect.innerHTML = '<option value="">اختر المدينة</option>';
+                
+                if (selectedGovernorate && citiesByGovernorate[selectedGovernorate]) {
+                    citiesByGovernorate[selectedGovernorate].forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city;
+                        option.textContent = city;
+                        citySelect.appendChild(option);
+                    });
+                }
+                
+                updatePreview();
+            });
+            
+            // إظهار/إخفاء عدد الأطفال بناءً على الحالة الاجتماعية
+            const maritalStatus = document.getElementById('maritalStatus');
+            const childrenNumberGroup = document.getElementById('childrenNumberGroup');
+            
+            maritalStatus.addEventListener('change', function() {
+                if (this.value === 'متزوج') {
+                    childrenNumberGroup.style.display = 'block';
+                } else {
+                    childrenNumberGroup.style.display = 'none';
+                }
+                updatePreview();
+            });
+            
+            // رفع الصورة الشخصية
+            document.getElementById('photoUpload').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const previewImg = document.getElementById('previewImg');
+                        const cvPhoto = document.getElementById('cvPhoto');
+                        const photoIcon = document.querySelector('.photo-preview i');
+                        
+                        previewImg.src = e.target.result;
+                        previewImg.style.display = 'block';
+                        cvPhoto.src = e.target.result;
+                        cvPhoto.style.display = 'block';
+                        photoIcon.style.display = 'none';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // إضافة خبرة جديدة
+            document.getElementById('addExperience').addEventListener('click', function() {
+                const experiencesDiv = document.getElementById('experiences');
+                const newExperience = document.createElement('div');
+                newExperience.className = 'experience-item';
+                newExperience.innerHTML = `
+                    <button class="remove-btn" onclick="removeItem(this)"><i class="fas fa-trash"></i></button>
+                    <div class="form-group">
+                        <label>المسمى الوظيفي</label>
+                        <input type="text" class="exp-title" placeholder="مثال: مطور ويب">
+                    </div>
+                    <div class="form-group">
+                        <label>اسم الشركة</label>
+                        <input type="text" class="exp-company" placeholder="اسم الشركة">
+                    </div>
+                    <div class="form-group">
+                        <label>الفترة</label>
+                        <input type="text" class="exp-period" placeholder="مثال: 2020 - 2022">
+                    </div>
+                    <div class="form-group">
+                        <label>الوصف</label>
+                        <textarea class="exp-description" rows="3" placeholder="وصف المسؤوليات والإنجازات"></textarea>
+                    </div>
+                `;
+                experiencesDiv.appendChild(newExperience);
+                
+                // إضافة مستمعي الأحداث للمدخلات الجديدة
+                const newInputs = newExperience.querySelectorAll('input, textarea');
+                newInputs.forEach(input => {
+                    input.addEventListener('input', updatePreview);
+                });
+            });
+            
+            // إضافة تعليم جديد
+            document.getElementById('addEducation').addEventListener('click', function() {
+                const educationsDiv = document.getElementById('educations');
+                const newEducation = document.createElement('div');
+                newEducation.className = 'education-item';
+                newEducation.innerHTML = `
+                    <button class="remove-btn" onclick="removeItem(this)"><i class="fas fa-trash"></i></button>
+                    <div class="form-group">
+                        <label>المؤهل</label>
+                        <input type="text" class="edu-degree" placeholder="مثال: بكالوريوس هندسة">
+                    </div>
+                    <div class="form-group">
+                        <label>المؤسسة التعليمية</label>
+                        <input type="text" class="edu-institution" placeholder="اسم الجامعة أو المعهد">
+                    </div>
+                    <div class="form-group">
+                        <label>الفترة</label>
+                        <input type="text" class="edu-period" placeholder="مثال: 2015 - 2019">
+                    </div>
+                `;
+                educationsDiv.appendChild(newEducation);
+                
+                // إضافة مستمعي الأحداث للمدخلات الجديدة
+                const newInputs = newEducation.querySelectorAll('input');
+                newInputs.forEach(input => {
+                    input.addEventListener('input', updatePreview);
+                });
+            });
+            
+            // إضافة كورس جديد
+            document.getElementById('addCourse').addEventListener('click', function() {
+                const coursesDiv = document.getElementById('courses');
+                const newCourse = document.createElement('div');
+                newCourse.className = 'course-item';
+                newCourse.innerHTML = `
+                    <button class="remove-btn" onclick="removeItem(this)"><i class="fas fa-trash"></i></button>
+                    <div class="form-group">
+                        <label>اسم الكورس</label>
+                        <input type="text" class="course-name" placeholder="مثال: تطوير الويب">
+                    </div>
+                    <div class="form-group">
+                        <label>المؤسسة</label>
+                        <input type="text" class="course-institution" placeholder="اسم المؤسسة">
+                    </div>
+                    <div class="form-group">
+                        <label>المدة</label>
+                        <input type="text" class="course-duration" placeholder="مثال: 3 أشهر">
+                    </div>
+                `;
+                coursesDiv.appendChild(newCourse);
+                
+                // إضافة مستمعي الأحداث للمدخلات الجديدة
+                const newInputs = newCourse.querySelectorAll('input');
+                newInputs.forEach(input => {
+                    input.addEventListener('input', updatePreview);
+                });
+            });
+            
+            // إرسال via WhatsApp
+            document.getElementById('sendWhatsApp').addEventListener('click', function() {
+                const phoneNumber = "201012274983";
+                const cvText = generateCVText();
+                const encodedText = encodeURIComponent(cvText);
+                const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedText}`;
+                
+                // إظهار رسالة النجاح
+                const alert = document.getElementById('successAlert');
+                alert.style.display = 'block';
+                
+                // التوجيه إلى الواتساب بعد ثانيتين
+                setTimeout(function() {
+                    window.open(whatsappURL, '_blank');
+                }, 2000);
+            });
+            
+            // تصدير إلى PDF
+            document.getElementById('exportPDF').addEventListener('click', function() {
+                const element = document.getElementById('cvPreview');
+                const opt = {
+                    margin: 10,
+                    filename: 'سيرتي_الذاتية.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+                
+                html2pdf().set(opt).from(element).save();
+            });
+            
+            // نسخة ATS
+            document.getElementById('exportATS').addEventListener('click', function() {
+                const element = document.getElementById('cvPreview');
+                // تغيير التنسيق ليكون مناسبًا لأنظمة تتبع المتقدمين
+                element.classList.add('ats-version');
+                
+                const opt = {
+                    margin: 10,
+                    filename: 'سيرتي_الذاتية_ATS.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+                
+                html2pdf().set(opt).from(element).save().then(() => {
+                    element.classList.remove('ats-version');
+                });
+            });
+            
+            // طباعة السيرة الذاتية
+            document.getElementById('printCV').addEventListener('click', function() {
+                const originalContents = document.body.innerHTML;
+                const printContents = document.getElementById('cvPreview').innerHTML;
+                
+                document.body.innerHTML = printContents;
+                window.print();
+                document.body.innerHTML = originalContents;
+                location.reload();
+            });
+            
+            // إرسال رسالة في الدردشة
+            document.getElementById('sendChat').addEventListener('click', function() {
+                const chatInput = document.getElementById('chatInput');
+                const chatMessages = document.getElementById('chatMessages');
+                
+                if (chatInput.value.trim() !== '') {
+                    // إضافة رسالة المستخدم
+                    const userMessage = document.createElement('div');
+                    userMessage.className = 'message user';
+                    userMessage.textContent = chatInput.value;
+                    chatMessages.appendChild(userMessage);
+                    
+                    // إرسال السؤال إلى الواتساب
+                    const phoneNumber = "201012274983";
+                    const questionText = `سؤال من المستخدم: ${chatInput.value}`;
+                    const encodedText = encodeURIComponent(questionText);
+                    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedText}`;
+                    window.open(whatsappURL, '_blank');
+                    
+                    // مسح حقل الإدخال
+                    chatInput.value = '';
+                    
+                    // تمرير إلى الأسفل
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            });
+            
+            // تحديث المعاينة أول مرة
+            updatePreview();
+        });
+        
+        function removeItem(button) {
+            const item = button.parentElement;
+            item.remove();
+            updatePreview();
+        }
+        
+        function updatePreview() {
+            // المعلومات الشخصية
+            const fullName = document.getElementById('fullName').value || 'الاسم بالكامل';
+            const jobTitle = document.getElementById('jobTitle').value || 'المسمى الوظيفي';
+            const nationalId = document.getElementById('nationalId').value;
+            const governorate = document.getElementById('governorate').value;
+            const city = document.getElementById('city').value;
+            const address = document.getElementById('address').value;
+            const birthDate = document.getElementById('birthDate').value;
+            const religion = document.getElementById('religion').value;
+            const maritalStatus = document.getElementById('maritalStatus').value;
+            const childrenNumber = document.getElementById('childrenNumber').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const phone2 = document.getElementById('phone2').value;
+            const summary = document.getElementById('summary').value || 'نبذة عنك';
+            
+            // تحديث header المعاينة
+            document.querySelector('.cv-name').textContent = fullName;
+            document.querySelector('.cv-title').textContent = jobTitle;
+            
+            // تحديث المعلومات الشخصية
+            let personalInfoHTML = '';
+            if (nationalId) personalInfoHTML += `<div>📋 الرقم القومي: ${nationalId}</div>`;
+            if (governorate) personalInfoHTML += `<div>🏙️ المحافظة: ${governorate}</div>`;
+            if (city) personalInfoHTML += `<div>🏙️ المدينة: ${city}</div>`;
+            if (address) personalInfoHTML += `<div>🏠 العنوان: ${address}</div>`;
+            if (birthDate) personalInfoHTML += `<div>📅 تاريخ الميلاد: ${birthDate}</div>`;
+            if (religion) personalInfoHTML += `<div>🕌 الدين: ${religion}</div>`;
+            if (maritalStatus) {
+                personalInfoHTML += `<div>💍 الحالة الاجتماعية: ${maritalStatus}`;
+                if (maritalStatus === 'متزوج' && childrenNumber) {
+                    personalInfoHTML += ` (${childrenNumber} أطفال)`;
+                }
+                personalInfoHTML += `</div>`;
+            }
+            if (email) personalInfoHTML += `<div>📧 البريد الإلكتروني: ${email}</div>`;
+            if (phone) personalInfoHTML += `<div>📞 الهاتف: ${phone}</div>`;
+            if (phone2) personalInfoHTML += `<div>📱 هاتف إضافي: ${phone2}</div>`;
+            
+            document.getElementById('cvPersonalInfo').innerHTML = personalInfoHTML || 'سيتم عرض المعلومات الشخصية هنا';
+            document.getElementById('cvSummary').textContent = summary;
+            
+            // تحديث الخبرات
+            const experienceItems = document.querySelectorAll('.experience-item');
+            let experiencesHTML = '';
+            
+            experienceItems.forEach(item => {
+                const title = item.querySelector('.exp-title').value;
+                const company = item.querySelector('.exp-company').value;
+                const period = item.querySelector('.exp-period').value;
+                const description = item.querySelector('.exp-description').value;
+                
+                if (title || company || period || description) {
+                    experiencesHTML += `
+                        <div class="cv-experience-item">
+                            <div class="cv-item-title">💼 ${title} ${company ? `- ${company}` : ''}</div>
+                            <div class="cv-item-date">📅 ${period}</div>
+                            <div class="cv-item-desc">${description}</div>
+                        </div>
+                    `;
+                }
+            });
+            
+            document.getElementById('cvExperiences').innerHTML = experiencesHTML || 'سيتم عرض الخبرات هنا';
+            
+            // تحديث التعليم
+            const educationItems = document.querySelectorAll('.education-item');
+            let educationsHTML = '';
+            
+            educationItems.forEach(item => {
+                const degree = item.querySelector('.edu-degree').value;
+                const institution = item.querySelector('.edu-institution').value;
+                const period = item.querySelector('.edu-period').value;
+                
+                if (degree || institution || period) {
+                    educationsHTML += `
+                        <div class="cv-education-item">
+                            <div class="cv-item-title">🎓 ${degree} ${institution ? `- ${institution}` : ''}</div>
+                            <div class="cv-item-date">📅 ${period}</div>
+                        </div>
+                    `;
+                }
+            });
+            
+            document.getElementById('cvEducations').innerHTML = educationsHTML || 'سيتم عرض المؤهلات التعليمية هنا';
+            
+            // تحديث الكورسات
+            const courseItems = document.querySelectorAll('.course-item');
+            let coursesHTML = '';
+            
+            courseItems.forEach(item => {
+                const name = item.querySelector('.course-name').value;
+                const institution = item.querySelector('.course-institution').value;
+                const duration = item.querySelector('.course-duration').value;
+                
+                if (name || institution || duration) {
+                    coursesHTML += `
+                        <div class="cv-course-item">
+                            <div class="cv-item-title">📚 ${name} ${institution ? `- ${institution}` : ''}</div>
+                            <div class="cv-item-date">⏱️ ${duration}</div>
+                        </div>
+                    `;
+                }
+            });
+            
+            document.getElementById('cvCourses').innerHTML = coursesHTML || 'سيتم عرض الكورسات هنا';
+            
+            // تحديث المهارات
+            const skills = document.getElementById('skills').value;
+            if (skills) {
+                const skillsArray = skills.split(',').map(skill => skill.trim());
+                const skillsHTML = skillsArray.map(skill => `<span style="background: #f0f0f0; padding: 5px 10px; border-radius: 20px; display: inline-block; margin: 5px;">✅ ${skill}</span>`).join(' ');
+                document.getElementById('cvSkills').innerHTML = skillsHTML;
+            } else {
+                document.getElementById('cvSkills').textContent = 'سيتم عرض المهارات هنا';
+            }
+        }
+        
+        function generateCVText() {
+            // المعلومات الشخصية
+            const fullName = document.getElementById('fullName').value || 'الاسم بالكامل';
+            const jobTitle = document.getElementById('jobTitle').value || 'المسمى الوظيفي';
+            const nationalId = document.getElementById('nationalId').value;
+            const governorate = document.getElementById('governorate').value;
+            const city = document.getElementById('city').value;
+            const address = document.getElementById('address').value;
+            const birthDate = document.getElementById('birthDate').value;
+            const religion = document.getElementById('religion').value;
+            const maritalStatus = document.getElementById('maritalStatus').value;
+            const childrenNumber = document.getElementById('childrenNumber').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const phone2 = document.getElementById('phone2').value;
+            const summary = document.getElementById('summary').value || 'نبذة عنك';
+            
+            let cvText = `*${fullName}* \n`;
+            cvText += `${jobTitle} \n\n`;
+            
+            cvText += `*المعلومات الشخصية:* \n`;
+            if (nationalId) cvText += `📋 الرقم القومي: ${nationalId} \n`;
+            if (governorate) cvText += `🏙️ المحافظة: ${governorate} \n`;
+            if (city) cvText += `🏙️ المدينة: ${city} \n`;
+            if (address) cvText += `🏠 العنوان: ${address} \n`;
+            if (birthDate) cvText += `📅 تاريخ الميلاد: ${birthDate} \n`;
+            if (religion) cvText += `🕌 الدين: ${religion} \n`;
+            if (maritalStatus) {
+                cvText += `💍 الحالة الاجتماعية: ${maritalStatus}`;
+                if (maritalStatus === 'متزوج' && childrenNumber) {
+                    cvText += ` (${childrenNumber} أطفال)`;
+                }
+                cvText += ` \n`;
+            }
+            if (email) cvText += `📧 البريد الإلكتروني: ${email} \n`;
+            if (phone) cvText += `📞 الهاتف: ${phone} \n`;
+            if (phone2) cvText += `📱 هاتف إضافي: ${phone2} \n`;
+            cvText += `\n`;
+            
+            cvText += `*نبذة عني:* \n`;
+            cvText += `${summary} \n\n`;
+            
+            // الخبرات
+            const experienceItems = document.querySelectorAll('.experience-item');
+            if (experienceItems.length > 0) {
+                cvText += `*الخبرات العملية:* \n`;
+                
+                experienceItems.forEach(item => {
+                    const title = item.querySelector('.exp-title').value;
+                    const company = item.querySelector('.exp-company').value;
+                    const period = item.querySelector('.exp-period').value;
+                    const description = item.querySelector('.exp-description').value;
+                    
+                    if (title || company || period || description) {
+                        cvText += `💼 ${title} ${company ? `- ${company}` : ''} \n`;
+                        if (period) cvText += `📅 ${period} \n`;
+                        if (description) cvText += `📋 ${description} \n`;
+                        cvText += `\n`;
+                    }
+                });
+            }
+            
+            // التعليم
+            const educationItems = document.querySelectorAll('.education-item');
+            if (educationItems.length > 0) {
+                cvText += `*التعليم:* \n`;
+                
+                educationItems.forEach(item => {
+                    const degree = item.querySelector('.edu-degree').value;
+                    const institution = item.querySelector('.edu-institution').value;
+                    const period = item.querySelector('.edu-period').value;
+                    
+                    if (degree || institution || period) {
+                        cvText += `🎓 ${degree} ${institution ? `- ${institution}` : ''} \n`;
+                        if (period) cvText += `📅 ${period} \n`;
+                        cvText += `\n`;
+                    }
+                });
+            }
+            
+            // الكورسات
+            const courseItems = document.querySelectorAll('.course-item');
+            if (courseItems.length > 0) {
+                cvText += `*الكورسات:* \n`;
+                
+                courseItems.forEach(item => {
+                    const name = item.querySelector('.course-name').value;
+                    const institution = item.querySelector('.course-institution').value;
+                    const duration = item.querySelector('.course-duration').value;
+                    
+                    if (name || institution || duration) {
+                        cvText += `📚 ${name} ${institution ? `- ${institution}` : ''} \n`;
+                        if (duration) cvText += `⏱️ ${duration} \n`;
+                        cvText += `\n`;
+                    }
+                });
+            }
+            
+            // المهارات
+            const skills = document.getElementById('skills').value;
+            if (skills) {
+                cvText += `*المهارات:* \n`;
+                cvText += `${skills} \n\n`;
+            }
+            
+            cvText += `--\nتم إنشاء هذه السيرة الذاتية باستخدام تطبيق صانع السير الذاتية\n`;
+            cvText += `تم التصميم والبرمجة بواسطة Dr. Zead Elsayed (The Boss)\n`;
+            
+            return cvText;
+        }
+    </script>
+</body>
+</html>
